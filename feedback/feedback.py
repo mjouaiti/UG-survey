@@ -41,9 +41,7 @@ def speech_analysis(speech):
     print("Silence: ", (len(audio) - len(words)) / len(audio))
     print("Speech rate: ", len(clips) / (len(audio) / sr))
     
-    
 
-### problem with Google API is that it either ignores filler words or detects something very irrelevant, like mum instead of hum or are instead of eeh.
 
 if __name__ == "__main__":
     transcript_analysis(transcript)
