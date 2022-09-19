@@ -1,0 +1,125 @@
+version: '3.1'
+intents:
+- bye
+- greet
+- inform_name
+- inform
+- report
+responses:
+  utter_greet:
+  - text: Hello! How can I help you?
+  utter_bye:
+  - text: Bye! Have a nice day! And good luck with your interview!
+  utter_ask_internship:
+  - text: You just mentioned an internship {about}. Can you give me more information about that?
+  - text: What about your internship {about}. What were your tasks?
+  - text: During your internship {about}, what was the biggest challenge you had to overcome?
+  utter_ask_name:
+  - text: Let me first ask you about your name.
+  utter_ask_about:
+  - text: Nice to meet you, {name}! My name is BrainBot. Why don't you tell me about yourself in 2, 3 sentences?
+  utter_ask_quality:
+  - text: What is your best quality?
+  utter_ask_interest:
+  - text: I would say {quality} is definitely a great quality! Why are you interested in Mechanical Engineering?
+  utter_ask_otherinterests:
+  - text: What are your interests, other than Mechanical Engineering, of course?
+  utter_ask_future:
+  - text: I also find {otherinterests} fascinating. Where do you see yourself in 10 years?
+  utter_ask_motiv:
+  - text: Brilliant plan. How do you think that Imperial can help you achieve that?
+  utter_ask_courses:
+  - text: You just mentioned being interested in some courses, can you tell me which ones in particular?
+  - text: You just mentioned the curriculum, which courses are you interested in?
+  utter_ask_hobby:
+  - text: What do you like to do in your free time?
+  utter_done:
+  - text: Lovely. We have reached the end of our practice session. I have generated some feedback for you. Hope this can be useful. Thanks for practising with me today
+entities:
+- PERSON
+- otherinterests
+- about
+- quality
+- motiv
+slots:
+  name:
+    type: text
+    mappings:
+    - type: from_entity
+      entity: name
+  about:
+    type: text
+    mappings:
+    - type: from_entity
+      entity: about
+  quality:
+    type: text
+    mappings:
+    - type: from_entity
+      entity: quality
+  interest:
+    type: text
+    mappings:
+    - type: from_text
+      conditions:
+      - active_loop: interview_form
+        requested_slot: interest
+  otherinterests:
+    type: text
+    mappings:
+    - type: from_entity
+      entity: otherinterests
+  future:
+    type: text
+    mappings:
+    - type: from_text
+      conditions:
+      - active_loop: interview_form
+        requested_slot: future
+  motiv:
+    type: text
+    mappings:
+    - type: from_text
+      conditions:
+      - active_loop: interview_form
+        requested_slot: motiv
+  hobby:
+    type: text
+    mappings:
+    - type: from_text
+      conditions:
+      - active_loop: interview_form
+        requested_slot: hobby
+  internship:
+    type: text
+    mappings:
+    - type: from_text
+      conditions:
+      - active_loop: interview_form
+        requested_slot: internship
+  courses:
+    type: text
+    mappings:
+    - type: from_text
+      conditions:
+      - active_loop: interview_form
+        requested_slot: courses
+forms:
+  interview_form:
+    required_slots:
+    - name
+    - about
+    - quality
+    - interest
+    - otherinterests
+    - future
+    - motiv
+    - hobby
+session_config:
+  session_expiration_time: 60
+  carry_over_slots_to_new_session: true
+actions:
+- utter_bye
+- utter_done
+- utter_greet
+- validate_interview_form

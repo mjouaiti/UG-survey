@@ -1,0 +1,27 @@
+version: "3.1"
+
+rules:
+
+- rule: Say goodbye anytime the user says goodbye
+  steps:
+  - intent: bye
+  - action: utter_bye
+  
+- rule: Say hello anytime the user says hello
+  steps:
+  - intent: greet
+  - action: utter_greet
+  
+- rule: activate interview form
+  steps:
+  - intent: report
+  - action: interview_form
+  - active_loop: interview_form
+  
+- rule: submit form
+  condition:
+  - active_loop: interview_form
+  steps:
+  - action: interview_form
+  - active_loop: null
+  - action: utter_done

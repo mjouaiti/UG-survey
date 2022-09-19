@@ -1,0 +1,77 @@
+version: "3.1"
+nlu:
+- intent: greet
+  examples: |
+    - hey
+    - hello
+    - hi
+    - hello there
+    - good morning
+    - good evening
+    - hey there
+    - let's go
+    - hey dude
+    - goodmorning
+    - goodevening
+    - good afternoon
+- intent: bye
+  examples: |
+    - cu
+    - good by
+    - cee you later
+    - good night
+    - bye
+    - goodbye
+    - have a nice day
+    - see you around
+    - bye bye
+    - see you later
+- intent: report
+  examples: |
+    - I want to practise my interview skills
+    - I want to interview
+    - interview practise
+    - interview me
+    - can you interview me?
+    - practise please
+    - I want to practice interview
+    - practice
+- intent: inform
+  examples: |
+    - The curriculum is relevant for what I want to do
+    - I am interested in the courses offered. They can give me a leg up to achieve my goals.
+    - I am interested in the curriculum, especially the [biomechanical engineering](motiv) course
+    - I am interested in the courses offered and particularly the [computer programming](motiv) course
+    - The curriculum is relevant for what I want to do, especially the [mathematics](motiv) courses.
+    - The curriculum is relevant for what I want to do, notably the [physics](motiv) courses.
+    - Imperial is a world-class university, attending would give me a leg up to achieve my goals
+    - I want to be a [researcher](future) and Imperial can give me a leg up to achieve that
+    - I want to be an [engineer](future) and Imperial can help me achieve that
+    - I want to be the [CEO](future) of a big company
+    - I could see myself as the [CEO](future) of a big company
+    - I could see myself as a [developer](future)
+    - My best quality is being [organised](quality)
+    - My best quality is [perseverance](quality)
+    - I am [determined](quality) and always know what I want
+    - I guess it would be [honest](quality)
+    - [Pragmatic](quality), I would say
+    - [Hard-working](quality), probably is my best quality
+    - I am [pragmatic](quality)
+    - I find [astronomy](otherinterests) fascinating
+    - I enjoy [mathematics](otherinterests)
+    - I like [programming](otherinterests) a lot
+    - I have a strong interest for [neuroscience](otherinterests)
+    - I am curious about [chemistry](otherinterests)
+    - I like [astronomy](otherinterests)
+    - I did an internship [at Google](about)
+    - I did an internship [with Pr. Ravi](about)
+    - I interned [at DeepMind](about)
+    - I interned [at Waterloo University with Prof. Kerstin](about)
+    - I interned [with Prof. Calvo](about)
+    - I was an intern [with Prof. Smith](about)
+    - I was an intern working [for Dr. Doe](about)
+    - I was an intern [at Bloomberg](about)
+    - I am a postdoc. I previously interned [at Microsoft](about).
+    - I previously interned [at Netflix](about). I gained experience in mechanics.
+    - I am a student. I previously interned [in an animal shelter](about)
+    - [pragmatic](quality), I would say

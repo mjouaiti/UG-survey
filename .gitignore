@@ -1,0 +1,6 @@
+interview_chatbot/models/*
+*.tar.gz
+__pycache__
+__pycache__/*
+.rasa
+.rasa/cache
