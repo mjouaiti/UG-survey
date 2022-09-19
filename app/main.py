@@ -6,11 +6,11 @@ from fastapi import Body, FastAPI, Response, status, HTTPException
 
 from app.db import database, User
 from app.schemas import *
-from data_dcarte.get_dcarte_data import *
+# from data_dcarte.get_dcarte_data import *
 from app.schemas import *
 from fastapi.middleware.cors import CORSMiddleware
 from fastapi.encoders import jsonable_encoder
-from nlp.summarisation import *
+# from nlp.summarisation import *
 
 
 # Initialize the FastAPI app for a simple web server
