@@ -11,9 +11,9 @@ responses:
   utter_bye:
   - text: Bye! Have a nice day! And good luck with your interview!
   utter_ask_internship:
-  - text: You just mentioned an internship {about}. Can you give me more information about that?
-  - text: What about your internship {about}. What were your tasks?
-  - text: During your internship {about}, what was the biggest challenge you had to overcome?
+  - text: You just mentioned an internship {internship}. Can you give me more information about that?
+  - text: What about your internship {internship}. What were your tasks?
+  - text: During your internship {internship}, what was the biggest challenge you had to overcome?
   utter_ask_name:
   - text: Let me first ask you about your name.
   utter_ask_about:
@@ -26,10 +26,14 @@ responses:
   - text: What are your interests, other than Mechanical Engineering, of course?
   utter_ask_future:
   - text: I also find {otherinterests} fascinating. Where do you see yourself in 10 years?
+  utter_ask_future2:
+  - text: You just mentioned you want to be {future}. Why do you think that this is the right career for you?
+  - text: Why do you think you would be a good {future}?
   utter_ask_motiv:
   - text: Brilliant plan. How do you think that Imperial can help you achieve that?
   utter_ask_courses:
   - text: You just mentioned being interested in some courses, can you tell me which ones in particular?
+  - text: I understand that you are interested in some courses, can you tell me more about that?
   - text: You just mentioned the curriculum, which courses are you interested in?
   utter_ask_hobby:
   - text: What do you like to do in your free time?
@@ -41,6 +45,8 @@ entities:
 - about
 - quality
 - motiv
+- future
+- internship
 slots:
   name:
     type: text
@@ -50,8 +56,10 @@ slots:
   about:
     type: text
     mappings:
-    - type: from_entity
-      entity: about
+    - type: from_text
+      conditions:
+      - active_loop: interview_form
+        requested_slot: about
   quality:
     type: text
     mappings:
@@ -72,10 +80,15 @@ slots:
   future:
     type: text
     mappings:
+    - type: from_entity
+      entity: future
+  future2:
+    type: text
+    mappings:
     - type: from_text
       conditions:
       - active_loop: interview_form
-        requested_slot: future
+        requested_slot: future2
   motiv:
     type: text
     mappings:
@@ -93,10 +106,8 @@ slots:
   internship:
     type: text
     mappings:
-    - type: from_text
-      conditions:
-      - active_loop: interview_form
-        requested_slot: internship
+    - type: from_entity
+      entity: internship
   courses:
     type: text
     mappings:

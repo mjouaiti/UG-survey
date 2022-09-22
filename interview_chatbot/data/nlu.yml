@@ -46,10 +46,10 @@ nlu:
     - The curriculum is relevant for what I want to do, notably the [physics](motiv) courses.
     - Imperial is a world-class university, attending would give me a leg up to achieve my goals
     - I want to be a [researcher](future) and Imperial can give me a leg up to achieve that
-    - I want to be an [engineer](future) and Imperial can help me achieve that
+    - I want to be an [elctrical engineer](future) and Imperial can help me achieve that
     - I want to be the [CEO](future) of a big company
     - I could see myself as the [CEO](future) of a big company
-    - I could see myself as a [developer](future)
+    - I could see myself as a [software developer](future)
     - My best quality is being [organised](quality)
     - My best quality is [perseverance](quality)
     - I am [determined](quality) and always know what I want
@@ -63,15 +63,22 @@ nlu:
     - I have a strong interest for [neuroscience](otherinterests)
     - I am curious about [chemistry](otherinterests)
     - I like [astronomy](otherinterests)
-    - I did an internship [at Google](about)
-    - I did an internship [with Pr. Ravi](about)
-    - I interned [at DeepMind](about)
-    - I interned [at Waterloo University with Prof. Kerstin](about)
-    - I interned [with Prof. Calvo](about)
-    - I was an intern [with Prof. Smith](about)
-    - I was an intern working [for Dr. Doe](about)
-    - I was an intern [at Bloomberg](about)
-    - I am a postdoc. I previously interned [at Microsoft](about).
-    - I previously interned [at Netflix](about). I gained experience in mechanics.
+    - I did an internship [at Google](internship)
+    - I did an internship [with Pr. Ravi](internship)
+    - I interned [at DeepMind](internship)
+    - I worked [at an agency](internship)
+    - I worked [in a marketing company](internship)
+    - I have been spending this summer interning [at a theater](internship) nonprofit
+    - I interned [at Waterloo University](internship) with Prof. Kerstin
+    - I interned [with Prof. Calvo](internship)
+    - I was an intern [with Prof. Smith](internship)
+    - I was an intern working [for Dr. Doe](internship)
+    - I was an intern [at Bloomberg](internship)
+    - I am a postdoc. I previously interned [at Microsoft](internship).
+    - I previously interned [at Netflix](internship). I gained experience in mechanics.
     - I am a student. I previously interned [in an animal shelter](about)
     - [pragmatic](quality), I would say
+    - I’m excited about this opportunity with the center
+    - I’m looking forward to this opportunity at the university
+    - I graduated from Howard in May with a major in computer science
+    - I’ve had a chance to put my coding skills to good use by helping revamp the organization’s ticket sales page

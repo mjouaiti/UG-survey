@@ -56,13 +56,13 @@ def summary():
     elif np.var(_volume) > THRESHOLD:
         feedback += "There were a lot of variations in the volume of your voice. Try to stabilise your voice."
     if np.mean(_silence) > 0.2:
-        feedback += "You are taking long pauses when you speak, this makes you appear hesitant."
+        feedback += "You are taking long pauses when you speak, try to reduce pauses to appear confident."
     elif np.mean(_silence) < 0.05:
         feedback += "You are not taking any pauses when you speak, this makes it harder to understand you."
     
-    if np.mean(_rate) * 60 > 160:
+    if np.mean(_rate) * 60 > 150:
         feedback += "Your speech rate is too high, try to speak slower"
-    elif np.mean(_rate) * 60 < 100:
+    elif np.mean(_rate) * 60 < 110:
         feedback += "Your speech rate is too low, try to speak a little faster"
         
     if np.mean(_fillers) > 0.1:

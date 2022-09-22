@@ -46,36 +46,53 @@ class ValidateInterviewtForm(FormValidationAction):
         
         updated_slots = domain_slots.copy()
         
-        if tracker.slots.get("future") is not None:
-            updated_slots.remove("future")
         
-        text_of_last_user_message = tracker.latest_message.get("text")
-
-        if tracker.slots.get("about") is not None:
-#        if "intern" in text_of_last_user_message:
+        if tracker.slots.get("internship") is not None:
             additional_slots.append("internship")
             
+        if tracker.slots.get("future") is not None:
+            updated_slots.remove("future")
+            additional_slots.append("future2")
+            additional_slots.append("motiv")
+        
+        text_of_last_user_message = tracker.latest_message.get("text")
         if ("course" in text_of_last_user_message or "curriculum" in text_of_last_user_message):# and not tracker.slots.get("motiv"):
             additional_slots.append("courses")
+            
+#    dispatcher.utter_message(text = str(example))
 
         return additional_slots + updated_slots
 
-    async def extract_about(self, dispatcher: CollectingDispatcher, tracker: Tracker, domain: "DomainDict"
+    async def extract_internship(self, dispatcher: CollectingDispatcher, tracker: Tracker, domain: "DomainDict"
     ) -> Dict[Text, Any]:
-        if tracker.slots.get("about") is not None:
-            return {"about": tracker.slots.get("about")}
-        try:
-            a = next(tracker.get_latest_entity_values(entity_type="about"))
-        except:
-            return {"about": None}
+    
+        d = {"internship": None}
+        for entity in tracker.latest_message['entities']:
+            if entity["entity"] == "internship":
+                d["internship"] = entity["value"]
+        
+        return d
+        
+    async def extract_future(self, dispatcher: CollectingDispatcher, tracker: Tracker, domain: "DomainDict"
+    ) -> Dict[Text, Any]:
+    
+        print(tracker.latest_message['entities'][0])
+        d = {"future": tracker.slots.get("future")}
+        
+        for entity in tracker.latest_message['entities']:
+            if entity["entity"] == "future":
+                d["future"] = entity["value"]
+        print(d)
+        
+        return d
                     
-        text_of_last_user_message = tracker.latest_message.get("text")
-        return {"about": a}
+#        text_of_last_user_message = tracker.latest_message.get("text")
         
     async def extract_name(self, dispatcher: CollectingDispatcher, tracker: Tracker, domain: "DomainDict"
     ) -> Dict[Text, Any]:
-        if tracker.slots.get("name") is not None:
-            return {"name": tracker.slots.get("name")}
+        name = tracker.slots.get("name")
+        if name is not None:
+            return {"name": name}
         try:
             name = next(tracker.get_latest_entity_values(entity_type="PERSON"))
         except:
