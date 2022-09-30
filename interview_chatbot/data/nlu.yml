@@ -14,6 +14,7 @@ nlu:
     - goodmorning
     - goodevening
     - good afternoon
+    - making coffee
 - intent: bye
   examples: |
     - cu
@@ -26,6 +27,24 @@ nlu:
     - see you around
     - bye bye
     - see you later
+- intent: start_math_problem
+  examples: |
+    - I want to try the math problem
+    - math problem
+    - math exercise
+    - I want to do the math problem
+- intent: done_math_problem
+  examples: |
+    - I am done with the math problem
+    - done
+    - I finished
+    - I have the answer
+- intent: help_math_problem
+  examples: |
+    - I am stuck
+    - I need help
+    - help
+    - I don't know how to do that
 - intent: report
   examples: |
     - I want to practise my interview skills
@@ -36,14 +55,15 @@ nlu:
     - practise please
     - I want to practice interview
     - practice
+    - [programming](topic)
 - intent: inform
   examples: |
     - The curriculum is relevant for what I want to do
     - I am interested in the courses offered. They can give me a leg up to achieve my goals.
-    - I am interested in the curriculum, especially the [biomechanical engineering](motiv) course
-    - I am interested in the courses offered and particularly the [computer programming](motiv) course
-    - The curriculum is relevant for what I want to do, especially the [mathematics](motiv) courses.
-    - The curriculum is relevant for what I want to do, notably the [physics](motiv) courses.
+    - I am interested in the curriculum, especially the [biomechanical engineering](topic) course
+    - I am interested in the courses offered and particularly the [computer programming](topic) course
+    - The curriculum is relevant for what I want to do, especially the [mathematics](topic) courses.
+    - The curriculum is relevant for what I want to do, notably the [physics](topic) courses.
     - Imperial is a world-class university, attending would give me a leg up to achieve my goals
     - I want to be a [researcher](future) and Imperial can give me a leg up to achieve that
     - I want to be an [elctrical engineer](future) and Imperial can help me achieve that
@@ -57,12 +77,13 @@ nlu:
     - [Pragmatic](quality), I would say
     - [Hard-working](quality), probably is my best quality
     - I am [pragmatic](quality)
-    - I find [astronomy](otherinterests) fascinating
-    - I enjoy [mathematics](otherinterests)
-    - I like [programming](otherinterests) a lot
-    - I have a strong interest for [neuroscience](otherinterests)
-    - I am curious about [chemistry](otherinterests)
-    - I like [astronomy](otherinterests)
+    - I find [astronomy](topic) fascinating
+    - I enjoy [mathematics](topic)
+    - I like [programming](topic) a lot
+    - I have a strong interest for [neuroscience](topic)
+    - I am curious about [chemistry](topic)
+    - I like [astronomy](topic)
+    - I like [physics](topic)
     - I did an internship [at Google](internship)
     - I did an internship [with Pr. Ravi](internship)
     - I interned [at DeepMind](internship)
@@ -82,3 +103,19 @@ nlu:
     - I’m looking forward to this opportunity at the university
     - I graduated from Howard in May with a major in computer science
     - I’ve had a chance to put my coding skills to good use by helping revamp the organization’s ticket sales page
+    - I am a high school student. I previously interned [at Google](internship). I want to be an [engineer](future)
+    - I like building things
+    - It's a good uni
+    - I am [pragmatic](quality), I would say
+    - I like building things. I am also interested in some of the courses
+    - yes, I want to study [mechatronics](topic)
+    - I also like [physics](topic)
+    - I am a postdoc. I previously interned [at Google](internship). I want to be an [engineer](future)
+    - good uni
+    - I like the courses you offer
+    - I am a postdoc. I previously interned [at Google](internship). I want to be an [engineer](future)
+    - I was making coffee
+    - I am [pragmatic](quality), I would say
+    - I am interested in the [programming](topic) course
+    - I like [astronomy](topic)
+    - I like reading

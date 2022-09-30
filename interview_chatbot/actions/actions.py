@@ -48,7 +48,7 @@ class ValidateInterviewtForm(FormValidationAction):
         
         
         if tracker.slots.get("internship") is not None:
-            additional_slots.append("internship")
+            additional_slots.append("internship2")
             
         if tracker.slots.get("future") is not None:
             updated_slots.remove("future")
@@ -56,7 +56,7 @@ class ValidateInterviewtForm(FormValidationAction):
             additional_slots.append("motiv")
         
         text_of_last_user_message = tracker.latest_message.get("text")
-        if ("course" in text_of_last_user_message or "curriculum" in text_of_last_user_message):# and not tracker.slots.get("motiv"):
+        if ("course" in text_of_last_user_message or "curriculum" in text_of_last_user_message) and not tracker.slots.get("topic"):
             additional_slots.append("courses")
             
 #    dispatcher.utter_message(text = str(example))
@@ -70,32 +70,65 @@ class ValidateInterviewtForm(FormValidationAction):
         for entity in tracker.latest_message['entities']:
             if entity["entity"] == "internship":
                 d["internship"] = entity["value"]
-        
         return d
         
     async def extract_future(self, dispatcher: CollectingDispatcher, tracker: Tracker, domain: "DomainDict"
     ) -> Dict[Text, Any]:
     
-        print(tracker.latest_message['entities'][0])
         d = {"future": tracker.slots.get("future")}
-        
         for entity in tracker.latest_message['entities']:
             if entity["entity"] == "future":
                 d["future"] = entity["value"]
-        print(d)
-        
         return d
                     
 #        text_of_last_user_message = tracker.latest_message.get("text")
         
     async def extract_name(self, dispatcher: CollectingDispatcher, tracker: Tracker, domain: "DomainDict"
     ) -> Dict[Text, Any]:
-        name = tracker.slots.get("name")
-        if name is not None:
-            return {"name": name}
-        try:
-            name = next(tracker.get_latest_entity_values(entity_type="PERSON"))
-        except:
-            return {"name": None}
-            
-        return {"name": name}
+        
+        d = {"name": tracker.slots.get("name")}
+        for entity in tracker.latest_message['entities']:
+            if entity["entity"] == "PERSON":
+                d["name"] = entity["value"]
+        return d
+
+    async def extract_topic(self, dispatcher: CollectingDispatcher, tracker: Tracker, domain: "DomainDict"
+    ) -> Dict[Text, Any]:
+        
+        d = {"topic": tracker.slots.get("topic")}
+        for entity in tracker.latest_message['entities']:
+            if entity["entity"] == "topic":
+                d["topic"] = entity["value"]
+        return d
+
+class ValidateMathForm(FormValidationAction):
+    def name(self) -> Text:
+        return "validate_interview_form"
+
+    async def required_slots(
+        self,
+        domain_slots: List[Text],
+        dispatcher: CollectingDispatcher,
+        tracker: Tracker,
+        domain: "DomainDict",
+    ) -> List[Text]:
+        additional_slots = []
+        
+        updated_slots = domain_slots.copy()
+        
+        text_of_last_user_message = tracker.latest_message.get("text")
+        if "help" in text_of_last_user_message:
+            if tracker.slots.get("math1") is None:
+                additional_slots.append("math1")
+            elif tracker.slots.get("math2") is None:
+                additional_slots.append("math2")
+            elif tracker.slots.get("math3") is None:
+                additional_slots.append("math3")
+        if "yes" in text_of_last_user_message:
+#            updated_slots.remove("math1")
+            if tracker.slots.get("math2") is None:
+                updated_slots.append("math2")
+            if tracker.slots.get("math3") is None:
+                updated_slots.append("math3")
+
+        return additional_slots + updated_slots

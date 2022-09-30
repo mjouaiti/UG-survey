@@ -18,6 +18,28 @@ rules:
   - action: interview_form
   - active_loop: interview_form
   
+- rule: start math problem
+  steps:
+  - intent: start_math_problem
+  - action: utter_start_math
+  - action: math_form
+  - active_loop: math_form
+  
+- rule: submit math form
+  steps:
+  - action: math_form
+  - active_loop: null
+  - action: utter_math_done
+  
+- rule: interrupt math form
+  condition:
+  - active_loop: math_form
+  - intent: done_math_problem
+  steps:
+  - action: math_form
+  - active_loop: null
+  - action: utter_math_done
+  
 - rule: submit form
   condition:
   - active_loop: interview_form

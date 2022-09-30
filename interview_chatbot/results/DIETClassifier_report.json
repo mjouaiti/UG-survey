@@ -1,0 +1,56 @@
+{
+  "future": {
+    "precision": 1.0,
+    "recall": 1.0,
+    "f1-score": 1.0,
+    "support": 9,
+    "confused_with": {}
+  },
+  "internship": {
+    "precision": 0.9142857142857143,
+    "recall": 0.7441860465116279,
+    "f1-score": 0.8205128205128205,
+    "support": 43,
+    "confused_with": {}
+  },
+  "topic": {
+    "precision": 0.9375,
+    "recall": 0.9375,
+    "f1-score": 0.9375,
+    "support": 16,
+    "confused_with": {}
+  },
+  "quality": {
+    "precision": 0.9,
+    "recall": 0.8181818181818182,
+    "f1-score": 0.8571428571428572,
+    "support": 11,
+    "confused_with": {}
+  },
+  "about": {
+    "precision": 1.0,
+    "recall": 0.5,
+    "f1-score": 0.6666666666666666,
+    "support": 4,
+    "confused_with": {}
+  },
+  "micro avg": {
+    "precision": 0.9305555555555556,
+    "recall": 0.8072289156626506,
+    "f1-score": 0.864516129032258,
+    "support": 83
+  },
+  "macro avg": {
+    "precision": 0.9503571428571428,
+    "recall": 0.7999735729386892,
+    "f1-score": 0.8563644688644688,
+    "support": 83
+  },
+  "weighted avg": {
+    "precision": 0.9302925989672977,
+    "recall": 0.8072289156626506,
+    "f1-score": 0.8599673418950526,
+    "support": 83
+  },
+  "accuracy": 0.9635416666666666
+}

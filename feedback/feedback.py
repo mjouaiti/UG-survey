@@ -2,6 +2,9 @@ import re
 import crepe
 import numpy as np
 
+import language_check
+tool = language_check.LanguageTool('en-US')
+
 mock_transcript = "Yeah, like, I don't know but maybe I'll be an engineer"
 transcript = mock_transcript
 
@@ -23,8 +26,14 @@ def transcript_analysis(transcript):
         
     _fillers.append(nb_fillers/nb_words)
     _maybe.append(nb_maybes/nb_words)
+    
+    
+    matches = tool.check(text)
+#    language_check.correct(text, matches)
+
     print("% of fillers: ", _fillers[-1])
     print("% of maybe: ", _maybe[-1])
+    print("# of grammatical errors: ", len(matches))
     
     
 def speech_analysis(speech):

@@ -2,3 +2,96 @@
 #### If you want to learn more, please see the docs: https://rasa.com/docs/rasa/testing-your-assistant
 
 stories:
+- story: interactive_story_1
+  steps:
+  - intent: greet
+  - action: utter_greet
+  - intent: report
+  - action: interview_form
+  - active_loop: interview_form
+  - slot_was_set:
+    - requested_slot: name
+  - slot_was_set:
+    - name: Linda
+  - slot_was_set:
+    - future: null
+  - slot_was_set:
+    - requested_slot: about
+  - slot_was_set:
+    - about: I am a postdoc. I previously interned at Google. I want to be an engineer
+  - slot_was_set:
+    - future: engineer
+  - slot_was_set:
+    - internship: at Google
+  - slot_was_set:
+    - about: I am a postdoc. I previously interned at Google. I want to be an engineer
+  - slot_was_set:
+    - name: Linda
+  - slot_was_set:
+    - requested_slot: internship2
+  - slot_was_set:
+    - internship2: I was making coffee
+  - slot_was_set:
+    - internship2: I was making coffee
+  - slot_was_set:
+    - name: Linda
+  - slot_was_set:
+    - requested_slot: future2
+  - slot_was_set:
+    - future2: I like building things
+  - slot_was_set:
+    - future2: I like building things
+  - slot_was_set:
+    - name: Linda
+  - slot_was_set:
+    - requested_slot: motiv
+  - slot_was_set:
+    - motiv: good uni
+  - slot_was_set:
+    - motiv: good uni
+  - slot_was_set:
+    - name: Linda
+  - slot_was_set:
+    - requested_slot: quality
+  - slot_was_set:
+    - quality: pragmatic
+  - slot_was_set:
+    - quality: pragmatic
+  - slot_was_set:
+    - name: Linda
+  - slot_was_set:
+    - requested_slot: interest
+  - slot_was_set:
+    - interest: I am interested in the programming course
+  - slot_was_set:
+    - topic: programming
+  - slot_was_set:
+    - interest: I am interested in the programming course
+  - slot_was_set:
+    - name: Linda
+  - slot_was_set:
+    - requested_slot: otherinterests
+  - slot_was_set:
+    - otherinterests: I like astronomy
+  - slot_was_set:
+    - topic: astronomy
+  - slot_was_set:
+    - otherinterests: I like astronomy
+  - slot_was_set:
+    - name: Linda
+  - slot_was_set:
+    - requested_slot: hobby
+  - slot_was_set:
+    - hobby: I like reading
+  - slot_was_set:
+    - hobby: I like reading
+  - slot_was_set:
+    - name: Linda
+  - slot_was_set:
+    - requested_slot: null
+  - slot_was_set:
+    - requested_slot: null
+  - active_loop: null
+  - action: utter_done
+  - intent: bye
+  - action: utter_bye
