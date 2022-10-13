@@ -29,7 +29,10 @@
 from typing import Dict, Text, List, Optional, Any
 from rasa_sdk.forms import FormValidationAction
 from rasa_sdk import Tracker
+from rasa_sdk.events import SlotSet
 from rasa_sdk.executor import CollectingDispatcher
+
+ANSWER = 4000
 
 class ValidateInterviewtForm(FormValidationAction):
     def name(self) -> Text:
@@ -103,7 +106,7 @@ class ValidateInterviewtForm(FormValidationAction):
 
 class ValidateMathForm(FormValidationAction):
     def name(self) -> Text:
-        return "validate_interview_form"
+        return "validate_math_form"
 
     async def required_slots(
         self,
@@ -124,11 +127,46 @@ class ValidateMathForm(FormValidationAction):
                 additional_slots.append("math2")
             elif tracker.slots.get("math3") is None:
                 additional_slots.append("math3")
+                
         if "yes" in text_of_last_user_message:
 #            updated_slots.remove("math1")
             if tracker.slots.get("math2") is None:
-                updated_slots.append("math2")
-            if tracker.slots.get("math3") is None:
-                updated_slots.append("math3")
+                additional_slots.append("math2")
+            elif tracker.slots.get("math3") is None:
+                additional_slots.append("math3")
+                
+        if "no" in text_of_last_user_message:
+            if tracker.slots.get("math2") is None:
+                additional_slots.append("no1")
+            elif tracker.slots.get("math3") is None:
+                additional_slots.append("no2")
+            else:
+                additional_slots.append("no3")
 
         return additional_slots + updated_slots
+
+#    def extract_help(
+#        self,
+#        slot_value: Any,
+#        dispatcher: CollectingDispatcher,
+#        tracker: Tracker,
+#        domain: "DomainDict",
+#    ) -> Dict[Text, Any]:
+#        text_of_last_user_message = tracker.latest_message.get("text")
+#        if "no" in text_of_last_user_message:
+#            return {"help": None}
+#        return {"help": tracker.slots.get("help")}
+
+    def validate_mathdone1(
+        self,
+        slot_value: Any,
+        dispatcher: CollectingDispatcher,
+        tracker: Tracker,
+        domain: "DomainDict",
+    ) -> Dict[Text, Any]:
+        """Validate value."""
+        if int(slot_value.lower()) == ANSWER:
+            dispatcher.utter_message(text="Well done, you found the right answer.")
+        else:
+            dispatcher.utter_message(text="Unfortunately, your answer is not correct.")
+        return {"mathdone1": slot_value}

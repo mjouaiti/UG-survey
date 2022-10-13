@@ -5,17 +5,14 @@ intents:
 - inform
 - inform_name
 - report
+- start_math_problem
 responses:
   utter_greet:
   - text: Hello! How can I help you?
   utter_intro:
-  - First let me introduce myself, my name is BrainBot. 
+  - text: First let me introduce myself, my name is BrainBot. I hope to be able to help you prepare for your upcoming interview. I am still in development, and such, I have some limitations, 
   utter_bye:
   - text: Bye! Have a nice day! And good luck with your interview!
-  utter_start_math:
-  - text: Let's try to solve this math problem now. Let me know when you're done or if you need help. [shows image]
-  utter_math_done:
-  - text: ok, great! Please walk me through your reasoning and give me your answer to the problem.
   utter_ask_internship2:
   - text: You just mentioned an internship {internship}. Can you give me more information about that?
   - text: What about your internship {internship}. What were your tasks?
@@ -23,19 +20,15 @@ responses:
   utter_ask_hs:
   - text: Please start by telling me what was your favourite subject in high school and why?
   utter_ask_:
-  - Can you tell me about anything that you have done that would demonstrate your passion for mechanical engineering?
+  - text: Can you tell me about anything that you have done that would demonstrate your passion for mechanical engineering?
   utter_ask_about:
   - text: Nice to meet you! My name is BrainBot. Why don't you tell me about yourself in 2, 3 sentences?
   utter_ask_quality:
   - text: What is your best quality?
   utter_ask_graph:
-  - text: Please grab a pen and paper and sketch a graph for the following equations: . Let me know when you are done.
-  utter_ask_math:
-  - text: Please spend 5 minutes on trying to solve this question. Let me know when you're done or if you are stuck.
-  utter_ask_mathsol:
-  - text: Please explain to me the steps taken to solve the problem.
+  - text: Please grab a pen and paper and sketch a graph for the following equations. Let me know when you are done.
   utter_ask_interest:
-  - Please explain which features of the mechanical engineering course at Imperial attracted you and why?
+  - text: Please explain which features of the mechanical engineering course at Imperial attracted you and why?
   - text: I would say {quality} is definitely a great quality! Why are you interested in the Mechanical Engineering course at Imperial?
   utter_ask_otherinterests:
   - text: What are your interests, other than Mechanical Engineering, of course?
@@ -57,13 +50,25 @@ responses:
   utter_done:
   - text: Lovely. We have reached the end of our practice session. I have generated some feedback for you. Hope this can be useful. Thanks for practising with me today
   utter_ask_help:
-  - text: Let me know if you need help.
+  - text: Let me know if you're done or if you need help.
   utter_ask_math1:
   - text: Ok, let's see where you got stuck. Did you start by putting the problem into equations?
   utter_ask_math2:
-  - text: Now you need to identify the minimum of a function. Do you know how to do that?
-  utter_ask_math2:
+  - text: Please check that your equations are correct. Now you need to identify the minimum of a function. Did you do that?
+  utter_ask_math3:
   - text: For the final step, you need to think about whether taking only one derivative is enough.
+  utter_start_math:
+  - text: Let's try to solve this math problem now. [shows image]
+  utter_ask_mathdone1:
+  - text: ok, great! Please give me the answer you found to the problem.
+  utter_ask_mathdone2:
+  - text: Can you walk me through your reasoning?
+  utter_ask_no1:
+  - text: Why don't you try doing that on your own and let me know if you need extra help?
+  utter_ask_no2:
+  - text: Try to take the derivative of your function to find the minimum.
+  utter_ask_no3:
+  - text: Why don't you keep trying a little on your own and let me know if you need extra help?
 entities:
 - quality
 - topic
@@ -156,6 +161,20 @@ slots:
       conditions:
       - active_loop: interview_form
         requested_slot: courses
+  mathdone1:
+    type: text
+    mappings:
+    - type: from_text
+      conditions:
+      - active_loop: math_form
+        requested_slot: mathdone1
+  mathdone2:
+    type: text
+    mappings:
+    - type: from_text
+      conditions:
+      - active_loop: math_form
+        requested_slot: mathdone2
   math1:
     type: text
     mappings:
@@ -177,6 +196,34 @@ slots:
       conditions:
       - active_loop: math_form
         requested_slot: math3
+  math4:
+    type: text
+    mappings:
+    - type: from_text
+      conditions:
+      - active_loop: math_form
+        requested_slot: math4
+  no1:
+    type: text
+    mappings:
+    - type: from_text
+      conditions:
+      - active_loop: math_form
+        requested_slot: no1
+  no2:
+    type: text
+    mappings:
+    - type: from_text
+      conditions:
+      - active_loop: math_form
+        requested_slot: no2
+  no3:
+    type: text
+    mappings:
+    - type: from_text
+      conditions:
+      - active_loop: math_form
+        requested_slot: no3
   help:
     type: text
     mappings:
@@ -198,6 +245,8 @@ forms:
   math_form:
     required_slots:
     - help
+    - mathdone1
+    - mathdone2
 session_config:
   session_expiration_time: 60
   carry_over_slots_to_new_session: true
@@ -208,3 +257,4 @@ actions:
 - utter_intro
 
 - validate_interview_form
+- validate_math_form

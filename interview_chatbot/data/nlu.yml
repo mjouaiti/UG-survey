@@ -33,12 +33,12 @@ nlu:
     - math problem
     - math exercise
     - I want to do the math problem
-- intent: done_math_problem
-  examples: |
-    - I am done with the math problem
-    - done
-    - I finished
-    - I have the answer
+#- intent: done_math_problem
+#  examples: |
+#    - I am done with the math problem
+#    - done
+#    - I finished
+#    - I have the answer
 - intent: help_math_problem
   examples: |
     - I am stuck
@@ -97,7 +97,7 @@ nlu:
     - I was an intern [at Bloomberg](internship)
     - I am a postdoc. I previously interned [at Microsoft](internship).
     - I previously interned [at Netflix](internship). I gained experience in mechanics.
-    - I am a student. I previously interned [in an animal shelter](about)
+    - I am a student. I previously interned [in an animal shelter](internship)
     - [pragmatic](quality), I would say
     - I’m excited about this opportunity with the center
     - I’m looking forward to this opportunity at the university

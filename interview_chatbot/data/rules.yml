@@ -29,16 +29,16 @@ rules:
   steps:
   - action: math_form
   - active_loop: null
-  - action: utter_math_done
+  - action: utter_bye
   
-- rule: interrupt math form
-  condition:
-  - active_loop: math_form
-  - intent: done_math_problem
-  steps:
-  - action: math_form
-  - active_loop: null
-  - action: utter_math_done
+#- rule: interrupt math form
+#  condition:
+#  - active_loop: math_form
+##  - intent: done_math_problem
+#  steps:
+#  - action: math_form
+#  - active_loop: null
+#  - action: utter_math_done
   
 - rule: submit form
   condition:
