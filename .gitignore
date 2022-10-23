@@ -3,3 +3,9 @@ __pycache__/*
 .rasa
 .rasa/cache
 .DS_Store
+.config/
+.dockerignore
+.keras/
+Dockerfile
+rasa-values.yaml
+registry_info.txt
