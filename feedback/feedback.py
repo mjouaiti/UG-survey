@@ -14,6 +14,7 @@ maybes = ["maybe", "may ", "might", "perhaps", "I don’t know"]
 _pitch, _volume = [], []
 _rate, _silence = [], []
 _fillers, _maybe = [], []
+_errors = []
 
 def transcript_analysis(transcript):
     nb_words = len(transcript.split(" "))
@@ -29,6 +30,7 @@ def transcript_analysis(transcript):
     
     
     matches = tool.check(text)
+    _errors.append(matches)
 #    language_check.correct(text, matches)
 
     print("% of fillers: ", _fillers[-1])
@@ -73,6 +75,9 @@ def summary():
         feedback += "Your speech rate is too high, try to speak slower"
     elif np.mean(_rate) * 60 < 110:
         feedback += "Your speech rate is too low, try to speak a little faster"
+        
+    if len(_errors) > 10:
+        feedback += "There are a number of grammatical errors in your speech, which makes it harder to understand you. You should practice your English."
         
     if np.mean(_fillers) > 0.1:
         feedback += "You are using a lot of filler words when you speak, this makes you appear hesitant, try to be more confident and assertive."

@@ -6,6 +6,7 @@ stories:
    - intent: greet
    - action: utter_greet
    - intent: report
+   - action: utter_intro
    - action: interview_form
    - active_loop: interview_form
    - intent: bye

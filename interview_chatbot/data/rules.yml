@@ -15,21 +15,22 @@ rules:
 - rule: activate interview form
   steps:
   - intent: report
+  - action: utter_intro
   - action: interview_form
   - active_loop: interview_form
   
-- rule: start math problem
-  steps:
-  - intent: start_math_problem
-  - action: utter_start_math
-  - action: math_form
-  - active_loop: math_form
-  
-- rule: submit math form
-  steps:
-  - action: math_form
-  - active_loop: null
-  - action: utter_bye
+#- rule: start math problem
+#  steps:
+#  - intent: start_math_problem
+#  - action: utter_start_math
+#  - action: math_form
+#  - active_loop: math_form
+#
+#- rule: submit math form
+#  steps:
+#  - action: math_form
+#  - active_loop: null
+#  - action: utter_bye
   
 #- rule: interrupt math form
 #  condition:

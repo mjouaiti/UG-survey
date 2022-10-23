@@ -10,45 +10,19 @@ responses:
   utter_greet:
   - text: Hello! How can I help you?
   utter_intro:
-  - text: First let me introduce myself, my name is BrainBot. I hope to be able to help you prepare for your upcoming interview. I am still in development, and such, I have some limitations, 
-  utter_bye:
-  - text: Bye! Have a nice day! And good luck with your interview!
-  utter_ask_internship2:
-  - text: You just mentioned an internship {internship}. Can you give me more information about that?
-  - text: What about your internship {internship}. What were your tasks?
-  - text: During your internship {internship}, what was the biggest challenge you had to overcome?
+  - text: First let me introduce myself, my name is BrainBot. I hope to be able to help you prepare for your upcoming interview. I am still in development, and as such, I have some limitations, I may not always understand what you're saying properly, so it would really helpful if you could speak slowly and try to articulate.
   utter_ask_hs:
   - text: Please start by telling me what was your favourite subject in high school and why?
-  utter_ask_:
+  utter_ask_passion:
   - text: Can you tell me about anything that you have done that would demonstrate your passion for mechanical engineering?
-  utter_ask_about:
-  - text: Nice to meet you! My name is BrainBot. Why don't you tell me about yourself in 2, 3 sentences?
-  utter_ask_quality:
-  - text: What is your best quality?
-  utter_ask_graph:
-  - text: Please grab a pen and paper and sketch a graph for the following equations. Let me know when you are done.
   utter_ask_interest:
   - text: Please explain which features of the mechanical engineering course at Imperial attracted you and why?
-  - text: I would say {quality} is definitely a great quality! Why are you interested in the Mechanical Engineering course at Imperial?
-  utter_ask_otherinterests:
-  - text: What are your interests, other than Mechanical Engineering, of course?
   utter_ask_future:
-  - text: I also find {otherinterests} fascinating. Where do you see yourself in 10 years?
-  utter_ask_future2:
-  - text: You just mentioned you want to be {future}. Why do you think that this is the right career for you?
-  - text: Why do you think you would be a good {future}?
-  utter_ask_motiv:
-  - text: Brilliant plan. How do you think that Imperial can help you achieve that?
-  utter_ask_courses:
-  - text: You just mentioned being interested in some courses, can you tell me which ones in particular?
-  - text: I understand that you are interested in some courses, can you tell me more about that?
-  - text: You just mentioned the curriculum, which courses are you interested in?
-  utter_ask_hobby:
-  - text: What do you like to do in your free time?
+  - text: Where do you see yourself in 10 years?
   utter_ask_extra:
   - text: Could you tell me about any extra-curricular activities that you were involved in, that demonstrates that you will be a great addition to our student community?
-  utter_done:
-  - text: Lovely. We have reached the end of our practice session. I have generated some feedback for you. Hope this can be useful. Thanks for practising with me today
+  utter_ask_startmath:
+  - text: I am done asking you questions for today. Let's try to solve the following math problem now. Let me know if you're done or if you need any help.
   utter_ask_help:
   - text: Let me know if you're done or if you need help.
   utter_ask_math1:
@@ -56,7 +30,9 @@ responses:
   utter_ask_math2:
   - text: Please check that your equations are correct. Now you need to identify the minimum of a function. Did you do that?
   utter_ask_math3:
-  - text: For the final step, you need to think about whether taking only one derivative is enough.
+  - text: Let's check that your first derivative is correct. For the final step, you need to take the second derivative. Have you done that?
+  utter_ask_math4:
+  - text: Let's check your second derivative. This is the last piece of advice that I can give you. Let me know when you're done and ready to give me your solution.
   utter_start_math:
   - text: Let's try to solve this math problem now. [shows image]
   utter_ask_mathdone1:
@@ -66,25 +42,45 @@ responses:
   utter_ask_no1:
   - text: Why don't you try doing that on your own and let me know if you need extra help?
   utter_ask_no2:
-  - text: Try to take the derivative of your function to find the minimum.
+  - text: Try to take the derivative of your function to find the minimum. Let me know if you need help again.
   utter_ask_no3:
   - text: Why don't you keep trying a little on your own and let me know if you need extra help?
+  utter_done:
+  - text: Lovely. We have reached the end of our practice session. I have generated some feedback for you. Hope this can be useful. Thanks for practising with me today
+  utter_bye:
+  - text: Bye! Have a nice day! And good luck with your interview!
 entities:
 - quality
 - topic
 - internship
-- future
+#- future
 - PERSON
 - otherinterests
 - about
 - motiv
 - internship2
 slots:
-  name:
+  hs:
     type: text
     mappings:
-    - type: from_entity
-      entity: name
+    - type: from_text
+      conditions:
+      - active_loop: interview_form
+        requested_slot: hs
+  passion:
+    type: text
+    mappings:
+    - type: from_text
+      conditions:
+      - active_loop: interview_form
+        requested_slot: passion
+  extra:
+    type: text
+    mappings:
+    - type: from_text
+      conditions:
+      - active_loop: interview_form
+        requested_slot: extra
   about:
     type: text
     mappings:
@@ -114,27 +110,29 @@ slots:
   future:
     type: text
     mappings:
-    - type: from_entity
-      entity: future
+    - type: from_text
+      conditions:
+      - active_loop: interview_form
+        requested_slot: future
   topic:
     type: text
     mappings:
     - type: from_entity
       entity: topic
-  future2:
-    type: text
-    mappings:
-    - type: from_text
-      conditions:
-      - active_loop: interview_form
-        requested_slot: future2
-  internship2:
-    type: text
-    mappings:
-    - type: from_text
-      conditions:
-      - active_loop: interview_form
-        requested_slot: internship2
+#  future2:
+#    type: text
+#    mappings:
+#    - type: from_text
+#      conditions:
+#      - active_loop: interview_form
+#        requested_slot: future2
+#  internship2:
+#    type: text
+#    mappings:
+#    - type: from_text
+#      conditions:
+#      - active_loop: interview_form
+#        requested_slot: internship2
   motiv:
     type: text
     mappings:
@@ -166,85 +164,80 @@ slots:
     mappings:
     - type: from_text
       conditions:
-      - active_loop: math_form
+      - active_loop: interview_form
         requested_slot: mathdone1
   mathdone2:
     type: text
     mappings:
     - type: from_text
       conditions:
-      - active_loop: math_form
+      - active_loop: interview_form
         requested_slot: mathdone2
   math1:
     type: text
     mappings:
     - type: from_text
       conditions:
-      - active_loop: math_form
+      - active_loop: interview_form
         requested_slot: math1
   math2:
     type: text
     mappings:
     - type: from_text
       conditions:
-      - active_loop: math_form
+      - active_loop: interview_form
         requested_slot: math2
   math3:
     type: text
     mappings:
     - type: from_text
       conditions:
-      - active_loop: math_form
+      - active_loop: interview_form
         requested_slot: math3
   math4:
     type: text
     mappings:
     - type: from_text
       conditions:
-      - active_loop: math_form
+      - active_loop: interview_form
         requested_slot: math4
   no1:
     type: text
     mappings:
     - type: from_text
       conditions:
-      - active_loop: math_form
+      - active_loop: interview_form
         requested_slot: no1
   no2:
     type: text
     mappings:
     - type: from_text
       conditions:
-      - active_loop: math_form
+      - active_loop: interview_form
         requested_slot: no2
   no3:
     type: text
     mappings:
     - type: from_text
       conditions:
-      - active_loop: math_form
+      - active_loop: interview_form
         requested_slot: no3
-  help:
+  startmath:
     type: text
     mappings:
     - type: from_text
       conditions:
-      - active_loop: math_form
-        requested_slot: help
+      - active_loop: interview_form
+        requested_slot: startmath
 forms:
   interview_form:
     required_slots:
-    - name
-#    - about
+    - hs
+    - passion
     - interest
-    - otherinterests
     - future
-    - quality
-    - motiv
-    - hobby
-  math_form:
-    required_slots:
-    - help
+    - extra
+    - startmath
     - mathdone1
     - mathdone2
 session_config:
@@ -257,4 +250,41 @@ actions:
 - utter_intro
 
 - validate_interview_form
-- validate_math_form
+#- validate_math_form
+
+
+#  utter_ask_internship2:
+#  - text: You just mentioned an internship {internship}. Can you give me more information about that?
+#  - text: What about your internship {internship}. What were your tasks?
+#  - text: During your internship {internship}, what was the biggest challenge you had to overcome?
+#  utter_ask_about:
+#  - text: Nice to meet you! My name is BrainBot. Why don't you tell me about yourself in 2, 3 sentences?
+#  utter_ask_quality:
+#  - text: What is your best quality?
+#  utter_ask_graph:
+#  - text: Please grab a pen and paper and sketch a graph for the following equations. Let me know when you are done.
+#  - text: I would say {quality} is definitely a great quality! Why are you interested in the Mechanical Engineering course at Imperial?
+#  utter_ask_otherinterests:
+#  - text: What are your interests, other than Mechanical Engineering, of course?
+#  utter_ask_future2:
+#  - text: You just mentioned you want to be {future}. Why do you think that this is the right career for you?
+#  - text: Why do you think you would be a good {future}?
+#  utter_ask_motiv:
+#  - text: Brilliant plan. How do you think that Imperial can help you achieve that?
+#  utter_ask_courses:
+#  - text: You just mentioned being interested in some courses, can you tell me which ones in particular?
+#  - text: I understand that you are interested in some courses, can you tell me more about that?
+#  - text: You just mentioned the curriculum, which courses are you interested in?
+#  utter_ask_hobby:
+#  - text: What do you like to do in your free time?
+
+
+#    - interest
+#    - otherinterests
+#    - future
+#    - quality
+#    - motiv
+#    - hobby
+#  math_form:
+#    required_slots:
+#    - help
