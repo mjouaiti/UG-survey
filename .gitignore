@@ -9,3 +9,5 @@ __pycache__/*
 Dockerfile
 rasa-values.yaml
 registry_info.txt
+statements.csv
+Dockerfile-action.yml.dockerfile
