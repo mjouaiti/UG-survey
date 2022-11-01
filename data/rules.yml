@@ -7,10 +7,10 @@ rules:
   - intent: bye
   - action: utter_bye
   
-- rule: Say hello anytime the user says hello
-  steps:
-  - intent: greet
-  - action: utter_greet
+#- rule: Say hello anytime the user says hello
+#  steps:
+#  - intent: greet
+#  - action: utter_greet
   
 - rule: activate interview form
   steps:

@@ -10,19 +10,19 @@ responses:
   utter_greet:
   - text: Hello! How can I help you?
   utter_intro:
-  - text: First let me introduce myself, my name is BrainBot. I hope to be able to help you prepare for your upcoming interview. I am still in development, and as such, I have some limitations, I may not always understand what you're saying properly, so it would really helpful if you could speak slowly and try to articulate.
+  - text: First let me introduce myself, my name is BrainBot. I hope to be able to help you prepare for your upcoming interview. I am still in development, and as such, I have some limitations, I may not always understand what you're saying properly, so it would be really helpful if you could speak slowly and try to articulate.
   utter_ask_hs:
   - text: Please start by telling me what was your favourite subject in high school and why?
   utter_ask_passion:
-  - text: Can you tell me about anything that you have done that would demonstrate your passion for mechanical engineering?
+  - text: Interesting. Can you tell me about anything that you have done that would demonstrate your passion for mechanical engineering?
   utter_ask_interest:
-  - text: Please explain which features of the mechanical engineering course at Imperial attracted you and why?
+  - text: That sounds amazing. Please explain which features of the mechanical engineering course at Imperial attracted you and why?
   utter_ask_future:
   - text: Where do you see yourself in 10 years?
   utter_ask_extra:
-  - text: Could you tell me about any extra-curricular activities that you were involved in, that demonstrates that you will be a great addition to our student community?
+  - text: That's an awesome plan! Could you tell me about any extra-curricular activities that you were involved in, that demonstrates that you will be a great addition to our student community?
   utter_ask_startmath:
-  - text: I am done asking you questions for today. Let's try to solve the following math problem now. Let me know if you're done by saying "done" or if you need any help by saying "help".
+  - text: Fantastic! I am done asking you questions for today. Let's try to solve the following math problem now. Let me know if you're done by saying "done" or if you need any help by saying "help".
   utter_ask_help:
   - text: Let me know if you're done by saying "done" or if you need any help by saying "help".
   utter_ask_math1:
@@ -36,7 +36,7 @@ responses:
   utter_start_math:
   - text: Let's try to solve this math problem now. [shows image]
   utter_ask_mathdone1:
-  - text: ok, great! Please give me the answer you found to the problem.
+  - text: ok, great! Please give me the answer you found to the problem by typing the numerical value.
   utter_ask_mathdone2:
   - text: Can you walk me through your reasoning?
   utter_ask_no1:
@@ -245,6 +245,13 @@ forms:
     - future
     - extra
     - startmath
+    - math1
+    - no1
+    - math2
+    - no2
+    - math3
+    - no3
+    - math4
     - help
     - mathdone1
     - mathdone2

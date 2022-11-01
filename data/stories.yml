@@ -3,8 +3,6 @@ version: "3.1"
 stories:
  - story: greet and practise interview (later add feedback)
    steps:
-   - intent: greet
-   - action: utter_greet
    - intent: report
    - action: utter_intro
    - action: interview_form
