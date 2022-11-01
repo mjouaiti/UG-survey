@@ -72,22 +72,23 @@ class ValidateInterviewtForm(FormValidationAction):
                 additional_slots.append("math3")
             elif tracker.slots.get("math4") is None:
                 additional_slots.append("math4")
-                
-        if "yes" in text_of_last_user_message:
+        elif "yes" in text_of_last_user_message and "math" in tracker.slots["requested_slot"]:
             if tracker.slots.get("math2") is None:
                 additional_slots.append("math2")
             elif tracker.slots.get("math3") is None:
                 additional_slots.append("math3")
             elif tracker.slots.get("math4") is None:
                 additional_slots.append("math4")
-                
-        if "no" in text_of_last_user_message:
+        elif "no" in text_of_last_user_message and "math" in tracker.slots["requested_slot"]:
             if tracker.slots.get("math2") is None:
                 additional_slots.append("no1")
             elif tracker.slots.get("math3") is None:
                 additional_slots.append("no2")
             else:
                 additional_slots.append("no3")
+                
+        if "done" in text_of_last_user_message:
+            updated_slots.remove("help")
             
 #    dispatcher.utter_message(text = str(example))
 
@@ -144,6 +145,73 @@ class ValidateInterviewtForm(FormValidationAction):
         else:
             dispatcher.utter_message(text="Unfortunately, your answer is not correct.")
         return {"mathdone1": slot_value}
+        
+    def validate_no1(
+        self,
+        slot_value: Any,
+        dispatcher: CollectingDispatcher,
+        tracker: Tracker,
+        domain: "DomainDict",
+    ) -> Dict[Text, Any]:
+        """Validate value."""
+        if tracker.slots["requested_slot"] != "no1":
+            return {"help": tracker.slots.get("no1")}
+        if not "done" in slot_value.lower() or not "help" in slot_value.lower():
+            return {"no1": slot_value}
+        return {"no1": None}
+        
+    def validate_no2(
+        self,
+        slot_value: Any,
+        dispatcher: CollectingDispatcher,
+        tracker: Tracker,
+        domain: "DomainDict",
+    ) -> Dict[Text, Any]:
+        """Validate value."""
+        if tracker.slots["requested_slot"] != "no2":
+            return {"help": tracker.slots.get("no2")}
+        if not "done" in slot_value.lower() or not "help" in slot_value.lower():
+            return {"no2": slot_value}
+        return {"no2": None}
+        
+    def validate_no3(
+        self,
+        slot_value: Any,
+        dispatcher: CollectingDispatcher,
+        tracker: Tracker,
+        domain: "DomainDict",
+    ) -> Dict[Text, Any]:
+        """Validate value."""
+        if tracker.slots["requested_slot"] != "no3":
+            return {"help": tracker.slots.get("no3")}
+        if not "done" in slot_value.lower() or not "help" in slot_value.lower():
+            return {"no3": slot_value}
+        return {"no3": None}
+                
+    def validate_startmath(
+        self,
+        slot_value: Any,
+        dispatcher: CollectingDispatcher,
+        tracker: Tracker,
+        domain: "DomainDict",
+    ) -> Dict[Text, Any]:
+        """Validate value."""
+        if tracker.slots["requested_slot"] != "startmath":
+            return {"help": tracker.slots.get("startmath")}
+        if "done" in slot_value.lower() or "help" in slot_value.lower():
+            return {"startmath": slot_value}
+        return {"startmath": None}
+        
+    def validate_help(
+        self,
+        slot_value: Any,
+        dispatcher: CollectingDispatcher,
+        tracker: Tracker,
+        domain: "DomainDict",
+    ) -> Dict[Text, Any]:
+        """Validate value."""
+        return {"help": None}
+        
 
 #
 #class ValidateMathForm(FormValidationAction):
