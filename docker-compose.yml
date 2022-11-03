@@ -9,6 +9,8 @@ services:
     command:
       - run
       - --enable-api
+      - --cors
+      - "*"
     depends_on:
       - "actions"
 
