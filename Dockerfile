@@ -3,7 +3,7 @@ FROM python:3.7-slim
 
 # install dependencies of interest
 RUN python -m pip install rasa[spacy] && \
-    python -m spacy download en_core_web_lg
+    python -m spacy download en_core_web_md
 
 # set workdir and copy data files from disk
 # note the latter command uses .dockerignore
@@ -12,12 +12,12 @@ ENV HOME=/app
 COPY . .
 
 # train a new rasa model
-#RUN rasa train nlu
+RUN rasa train nlu
 
 # set the user to run, don't run as root
 USER 1001
 
-# set entrypoint for interactive shells
+# set entrypoint for interactive shells                                                                                                                      
 ENTRYPOINT ["rasa"]
 
 # command to run when container is called to run
