@@ -10,5 +10,3 @@ Dockerfile
 rasa-values.yaml
 registry_info.txt
 statements.csv
-Dockerfile-action.yml.dockerfile
-endpoints.yml

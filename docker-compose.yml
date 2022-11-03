@@ -1,7 +1,7 @@
 version: '3.0'
 services:
   rasa:
-    image: rasa/rasa:latest-full
+    image: mathildast/rasa-test:debugged
     ports:
       - 80:5005
     volumes:
@@ -13,8 +13,8 @@ services:
       - "actions"
 
   actions:
-    image: rasa/rasa-sdk:latest
+    image: mathildast/rasa-action:debugged
     volumes:
       - ./actions:/app/actions
-    ports: 
+    ports:
       - 5055:5055
