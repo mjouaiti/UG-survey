@@ -33,7 +33,8 @@ from rasa_sdk.events import SlotSet
 from rasa_sdk.executor import CollectingDispatcher
 import json
 
-ANSWER = 4000
+ANSWER = 2000
+ANSWER2 = 2
 
 class ValidateInterviewtForm(FormValidationAction):
     def name(self) -> Text:
@@ -118,7 +119,7 @@ class ValidateInterviewtForm(FormValidationAction):
                 except ValueError:
                     continue
             
-            if answer == ANSWER:
+            if answer == ANSWER or answer == ANSWER2:
                 dispatcher.utter_message(text="Well done, you found the right answer.")
             else:
                 dispatcher.utter_message(text="Unfortunately, your answer is not correct.")
