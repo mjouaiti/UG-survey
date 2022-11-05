@@ -22,19 +22,19 @@ responses:
   utter_ask_extra:
   - text: That's an awesome plan! Could you tell me about any extra-curricular activities that you were involved in, that demonstrates that you will be a great addition to our student community?
   utter_ask_startmath:
-  - text: Fantastic! I am done asking you questions for today. Let's try to solve the following math problem now {{https://www.icloud.com/iclouddrive/0d7jiSGcgLWEr_-S1V8XJ03Ig#photo%5F2022-11-02%5F15-34-46}}. Let me know if you're done by saying "done" or if you need any help by saying "help".
+  - text: Fantastic! I am done asking you questions for today. Let's try to solve the following math problem now. A pipeline is to be run from an oil refinery on a river bank to a set of storage tanks which lie on the other side of the river. The pipeline is to be built so that the overland portion follows the river bank and then crosses beneath the river along a straight path. The river is 2 km wide and the tanks are 6 km downriver from the refinery. It costs £1200k per km to run the pipeline under the river and £600k per km to run the pipeline over land. Find the point at which the pipeline should begin its passage under the river so as to minimize the total cost of construction. {{img:https://rasastorage.blob.core.windows.net/images/question.jpg}}. Let me know if you're done by saying "done" or if you need any help by saying "help".
   utter_ask_help:
   - text: Let me know if you're done by saying "done" or if you need any help by saying "help".
   utter_ask_math1:
   - text: Ok, let's see where you got stuck. Did you start by putting the problem into equations?
   utter_ask_math2:
-  - text: Please check that your equations are correct {{https://www.icloud.com/iclouddrive/0e6VZU6FiiKQfU_AtF3iOkuvg#IMG%5F8136}}. Now you need to identify the minimum of a function. Did you do that?
+  - text: Please check that your equations are correct {{img:https://rasastorage.blob.core.windows.net/images/equation.jpg}}. Now you need to identify the minimum of a function. Did you do that?
   utter_ask_math3:
-  - text: Let's check that your first derivative is correct. For the final step, you need to take the second derivative. Have you done that?
+  - text: Let's check that your first derivative is correct {{img:https://rasastorage.blob.core.windows.net/images/derivative1.jpg}}. For the final step, you need to take the second derivative. Have you done that?
   utter_ask_math4:
-  - text: Let's check your second derivative. This is the last piece of advice that I can give you. Let me know when you're done and ready to give me your solution by saying "done".
+  - text: Let's check your second derivative {{img:https://rasastorage.blob.core.windows.net/images/derivative2.jpg}}. This is the last piece of advice that I can give you. Let me know when you're done and ready to give me your solution by saying "done".
   utter_ask_mathdone1:
-  - text: ok, great! Please give me the answer you found to the problem by typing the numerical value.
+  - text: ok, great! Please give me the answer you found to the problem by saying the numerical value.
   utter_ask_mathdone2:
   - text: Can you walk me through your reasoning?
   utter_ask_no1:
