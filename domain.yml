@@ -28,7 +28,7 @@ responses:
   utter_ask_math1:
   - text: Ok, let's see where you got stuck. Did you start by putting the problem into equations?
   utter_ask_math2:
-  - text: Please check that your equations are correct. \n {{img:https://rasastorage.blob.core.windows.net/images/equation.jpg}} \n Now you need to identify the minimum of a function. Did you do that?
+  - text: Please check that your equations are correct. If we simplify the problem as the following \n {{img:https://rasastorage.blob.core.windows.net/images/question.jpg}} \n The euqation should look like the following \n {{img:https://rasastorage.blob.core.windows.net/images/equation.jpg}} \n Now you need to identify the minimum of a function. Did you do that?
   utter_ask_math3:
   - text: Let's check that your first derivative is correct. \n {{img:https://rasastorage.blob.core.windows.net/images/derivative1.jpg}} \n For the final step, you need to take the second derivative. Have you done that?
   utter_ask_math4:
