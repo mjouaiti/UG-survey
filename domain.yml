@@ -5,7 +5,6 @@ intents:
 - inform
 - inform_name
 - report
-- start_math_problem
 responses:
   utter_greet:
   - text: Hello! How can I help you?
@@ -22,31 +21,37 @@ responses:
   utter_ask_extra:
   - text: That's an awesome plan! Could you tell me about any extra-curricular activities that you were involved in, that demonstrates that you will be a great addition to our student community?
   utter_ask_startmath:
-  - text: Fantastic! I am done asking you questions for today. Let's try to solve the following math problem now. \n A pipeline is to be run from an oil refinery on a river bank to a set of storage tanks which lie on the other side of the river. The pipeline is to be built so that the overland portion follows the river bank and then crosses beneath the river along a straight path. The river is 3 km wide and the tanks are 6 km downriver from the refinery. It costs £1200k per km to run the pipeline under the river and £960k per km to run the pipeline over land. Find out the length of the pipeline being above the river so as to minimize the total cost of construction. \n {{img:https://rasastorage.blob.core.windows.net/images/question.jpg}} \n Let me know if you're done by saying "done" or if you need any help by saying "help".
+  - text: Fantastic! I am done asking you questions for today. Let's try to solve the following math problem now. {{https://www.icloud.com/iclouddrive/0d7jiSGcgLWEr_-S1V8XJ03Ig#photo%5F2022-11-02%5F15-34-46}} \n A pipeline is to be run from an oil refinery on a river bank to a set of storage tanks which lie on the other side of the river. The pipeline is to be built so that the overland portion follows the river bank and then crosses beneath the river along a straight path. The river is 3 km wide and the tanks are 6 km downriver from the refinery. It costs £1200k per km to run the pipeline under the river and £960k per km to run the pipeline over land. Find out the length of the pipeline being above the river so as to minimize the total cost of construction. \n {{img:https://rasastorage.blob.core.windows.net/images/question.jpg}} \n Let me know if you're done by saying "done" or if you need any help by saying "help".
   utter_ask_help:
   - text: Let me know if you're done by saying "done" or if you need any help by saying "help".
   utter_ask_math1:
   - text: Ok, let's see where you got stuck. Did you start by putting the problem into equations?
   utter_ask_math2:
-  - text: Please check that your equations are correct. If we simplify the problem as the following \n {{img:https://rasastorage.blob.core.windows.net/images/question.jpg}} \n The euqation should look like the following \n {{img:https://rasastorage.blob.core.windows.net/images/equation.jpg}} \n Now you need to identify the minimum of a function. Did you do that?
+  - text: Please check that your equations are correct {{https://www.icloud.com/iclouddrive/0e6VZU6FiiKQfU_AtF3iOkuvg#IMG%5F8136}}. Now you need to identify the minimum of a function. Did you do that?
   utter_ask_math3:
-  - text: Let's check that your first derivative is correct. \n {{img:https://rasastorage.blob.core.windows.net/images/derivative1.jpg}} \n For the final step, you need to take the second derivative. Have you done that?
-  utter_ask_math4:
-  - text: Let's check your second derivative. \n {{img:https://rasastorage.blob.core.windows.net/images/derivative2.jpg}}. \n This is the last piece of advice that I can give you. \n Let me know when you're done and ready to give me your solution by saying "done".
+  - text: Let's check that your first derivative is correct.  This is the last piece of advice that I can give you. Let me know when you're done and ready to give me your solution by saying "done".
+#  utter_ask_math4:
+#  - text: Let's check your second derivative.
   utter_ask_mathdone1:
-  - text: ok, great! Please give me the answer you found to the problem by saying the numerical value.
+  - text: ok, great! Please give me the answer you found to the problem by typing the numerical value.
   utter_ask_mathdone2:
   - text: Can you walk me through your reasoning?
   utter_ask_no1:
   - text: Why don't you try doing that on your own and let me know if you need extra help for the next steps by saying "help", if you found the solution, say "done".
   utter_ask_no2:
   - text: Try to take the derivative of your function to find the minimum. Let me know if you need help again by saying "help", if you found the solution, say "done".
-  utter_ask_no3:
-  - text: Why don't you keep trying a little on your own and let me know if you need extra help by saying "help", if you found the solution, say "done".
+#  utter_ask_no3:
+#  - text: Why don't you keep trying a little on your own and let me know if you need extra help by saying "help", if you found the solution, say "done".
   utter_done:
   - text: Lovely. We have reached the end of our practice session. I have generated some feedback for you. Hope this can be useful. Thanks for practising with me today
   utter_bye:
   - text: Bye! Have a nice day! And good luck with your interview!
+  utter_ask_internship:
+  - text: Can you give me more information about that?
+  - text: What were your tasks?
+  - text: What was the biggest challenge you had to overcome?
+  utter_ask_hobby:
+  - text: Can you give me more information about that?
 entities:
 - quality
 - topic
@@ -56,7 +61,6 @@ entities:
 - otherinterests
 - about
 - motiv
-- internship2
 slots:
   hs:
     type: text
@@ -124,13 +128,13 @@ slots:
 #      conditions:
 #      - active_loop: interview_form
 #        requested_slot: future2
-#  internship2:
-#    type: text
-#    mappings:
-#    - type: from_text
-#      conditions:
-#      - active_loop: interview_form
-#        requested_slot: internship2
+  internship:
+    type: text
+    mappings:
+    - type: from_text
+      conditions:
+      - active_loop: interview_form
+        requested_slot: internship
   motiv:
     type: text
     mappings:
@@ -145,11 +149,6 @@ slots:
       conditions:
       - active_loop: interview_form
         requested_slot: hobby
-  internship:
-    type: text
-    mappings:
-    - type: from_entity
-      entity: internship
   courses:
     type: text
     mappings:
@@ -192,13 +191,13 @@ slots:
       conditions:
       - active_loop: interview_form
         requested_slot: math3
-  math4:
-    type: text
-    mappings:
-    - type: from_text
-      conditions:
-      - active_loop: interview_form
-        requested_slot: math4
+#  math4:
+#    type: text
+#    mappings:
+#    - type: from_text
+#      conditions:
+#      - active_loop: interview_form
+#        requested_slot: math4
   no1:
     type: text
     mappings:
@@ -213,13 +212,6 @@ slots:
       conditions:
       - active_loop: interview_form
         requested_slot: no2
-  no3:
-    type: text
-    mappings:
-    - type: from_text
-      conditions:
-      - active_loop: interview_form
-        requested_slot: no3
   startmath:
     type: text
     mappings:
@@ -248,8 +240,6 @@ forms:
     - math2
     - no2
     - math3
-    - no3
-    - math4
     - help
     - mathdone1
     - mathdone2
@@ -266,10 +256,7 @@ actions:
 #- validate_math_form
 
 
-#  utter_ask_internship2:
-#  - text: You just mentioned an internship {internship}. Can you give me more information about that?
-#  - text: What about your internship {internship}. What were your tasks?
-#  - text: During your internship {internship}, what was the biggest challenge you had to overcome?
+
 #  utter_ask_about:
 #  - text: Nice to meet you! My name is BrainBot. Why don't you tell me about yourself in 2, 3 sentences?
 #  utter_ask_quality:

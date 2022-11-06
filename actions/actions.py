@@ -63,16 +63,6 @@ class ValidateInterviewtForm(FormValidationAction):
         text_of_last_user_message = tracker.latest_message.get("text")
 #        if ("course" in text_of_last_user_message or "curriculum" in text_of_last_user_message) and not tracker.slots.get("topic"):
 #            additional_slots.append("courses")
-            
-#        if tracker.slots["requested_slot"] in ["startmath", "math1", "math2", "math3"] and "help" in text_of_last_user_message.lower():
-#            if tracker.slots.get("math1") is None:
-#                additional_slots.append("math1")
-#            elif tracker.slots.get("math2") is None:
-#                additional_slots.append("math2")
-#            elif tracker.slots.get("math3") is None:
-#                additional_slots.append("math3")
-#            elif tracker.slots.get("math4") is None:
-#                additional_slots.append("math4")
                 
         if tracker.slots["requested_slot"] == "math1" and tracker.slots.get("math1") == "yes":
             updated_slots.remove("no1")
@@ -80,22 +70,13 @@ class ValidateInterviewtForm(FormValidationAction):
             updated_slots.remove("no2")
         if tracker.slots["requested_slot"] == "math3" and tracker.slots.get("math3") == "yes":
             updated_slots.remove("no3")
-            
-#        if tracker.slots["requested_slot"] == "math1" and tracker.slots.get("math1") == "no":
-#            additional_slots.append("no1")
-#        if tracker.slots["requested_slot"] == "math2" and tracker.slots.get("math2") == "no":
-#            additional_slots.append("no2")
-#        if tracker.slots["requested_slot"] == "math3" and tracker.slots.get("math3") == "no":
-#            additional_slots.append("no3")
                 
-        if "done" in text_of_last_user_message.lower():
+        if (tracker.slots["requested_slot"] == "startmath" or tracker.slots["requested_slot"] == "no1" or tracker.slots["requested_slot"] == "no2" or tracker.slots["requested_slot"] == "math3") and "done" in text_of_last_user_message.lower():
             updated_slots.remove("no1")
             updated_slots.remove("no2")
-            updated_slots.remove("no3")
             updated_slots.remove("math1")
             updated_slots.remove("math2")
             updated_slots.remove("math3")
-            updated_slots.remove("math4")
             updated_slots.remove("help")
 
         return additional_slots + updated_slots
@@ -151,7 +132,7 @@ class ValidateInterviewtForm(FormValidationAction):
     ) -> Dict[Text, Any]:
         if tracker.slots["requested_slot"] != "math1":
             return {"math1": tracker.slots.get("math1")}
-        slot_value = slot_value.lower().split(" ")
+        slot_value = slot_value[:-1].lower().split(" ")
         if "didn't" in slot_value or "not" in slot_value or "no" in slot_value or "haven't" in slot_value:
             return {"math1": "no"}
         elif "did" in slot_value or "have" in slot_value or "yes" in slot_value:
@@ -167,7 +148,7 @@ class ValidateInterviewtForm(FormValidationAction):
     ) -> Dict[Text, Any]:
         if tracker.slots["requested_slot"] != "math2":
             return {"math2": tracker.slots.get("math2")}
-        slot_value = slot_value.lower().split(" ")
+        slot_value = slot_value[:-1].lower().split(" ")
         if "didn't" in slot_value or "not" in slot_value or "no" in slot_value or "haven't" in slot_value:
             return {"math2": "no"}
         elif "did" in slot_value or "have" in slot_value or "yes" in slot_value:
@@ -183,28 +164,36 @@ class ValidateInterviewtForm(FormValidationAction):
     ) -> Dict[Text, Any]:
         if tracker.slots["requested_slot"] != "math3":
             return {"math3": tracker.slots.get("math3")}
-        slot_value = slot_value.lower().split(" ")
-        if "didn't" in slot_value or "not" in slot_value or "no" in slot_value or "haven't" in slot_value:
-            return {"math3": "no"}
-        elif "did" in slot_value or "have" in slot_value or "yes" in slot_value:
-            return {"math3": "yes"}
-        return {"math3": None}
-                
-    def validate_math4(
-        self,
-        slot_value: Any,
-        dispatcher: CollectingDispatcher,
-        tracker: Tracker,
-        domain: "DomainDict",
-    ) -> Dict[Text, Any]:
-        if tracker.slots["requested_slot"] != "math4":
-            return {"math4": tracker.slots.get("math4")}
-        slot_value = slot_value.lower().split(" ")
+        slot_value = slot_value[:-1].lower().split(" ")
         if "done" in slot_value:
-            return {"math4": "done"}
+            return {"math3": "done"}
         else:
-            return {"math4": None}
-        return {"math4": None}
+            return {"math3": None}
+        return {"math3": None}
+#        if tracker.slots["requested_slot"] != "math3":
+#            return {"math3": tracker.slots.get("math3")}
+#        slot_value = slot_value.lower().split(" ")
+#        if "didn't" in slot_value or "not" in slot_value or "no" in slot_value or "haven't" in slot_value:
+#            return {"math3": "no"}
+#        elif "did" in slot_value or "have" in slot_value or "yes" in slot_value:
+#            return {"math3": "yes"}
+#        return {"math3": None}
+                
+#    def validate_math4(
+#        self,
+#        slot_value: Any,
+#        dispatcher: CollectingDispatcher,
+#        tracker: Tracker,
+#        domain: "DomainDict",
+#    ) -> Dict[Text, Any]:
+#        if tracker.slots["requested_slot"] != "math4":
+#            return {"math4": tracker.slots.get("math4")}
+#        slot_value = slot_value.lower().split(" ")
+#        if "done" in slot_value:
+#            return {"math4": "done"}
+#        else:
+#            return {"math4": None}
+#        return {"math4": None}
             
     def validate_no2(
         self,
@@ -269,7 +258,7 @@ class ValidateInterviewtForm(FormValidationAction):
     ) -> Dict[Text, Any]:
         """Validate value."""
         if tracker.slots["requested_slot"] == "hs":
-            if len(slot_value.split(" ")) < 2:
+            if not "." in slot_value:
                 return {"hs": None}
         return {"hs": tracker.slots.get("hs")}
             
@@ -282,7 +271,7 @@ class ValidateInterviewtForm(FormValidationAction):
     ) -> Dict[Text, Any]:
         """Validate value."""
         if tracker.slots["requested_slot"] == "passion":
-            if len(slot_value.split(" ")) < 2:
+            if not "." in slot_value:
                 return {"passion": None}
         return {"passion": tracker.slots.get("passion")}
             
@@ -295,7 +284,7 @@ class ValidateInterviewtForm(FormValidationAction):
     ) -> Dict[Text, Any]:
         """Validate value."""
         if tracker.slots["requested_slot"] == "interest":
-            if len(slot_value.split(" ")) < 2:
+            if not "." in slot_value:
                 return {"interest": None}
         return {"interest": tracker.slots.get("interest")}
                 
@@ -309,7 +298,7 @@ class ValidateInterviewtForm(FormValidationAction):
     ) -> Dict[Text, Any]:
         """Validate value."""
         if tracker.slots["requested_slot"] == "future":
-            if len(slot_value.split(" ")) < 2:
+            if not "." in slot_value:
                 return {"future": None}
         return {"future": tracker.slots.get("future")}
             
@@ -322,7 +311,7 @@ class ValidateInterviewtForm(FormValidationAction):
     ) -> Dict[Text, Any]:
         """Validate value."""
         if tracker.slots["requested_slot"] == "extra":
-            if len(slot_value.split(" ")) < 2:
+            if not "." in slot_value:
                 return {"extra": None}
         return {"extra": tracker.slots.get("extra")}
         
@@ -350,11 +339,11 @@ class ValidateInterviewtForm(FormValidationAction):
             return {"math3": "done"}
         return {"math3": tracker.slots.get("math3")}
         
-    def extract_math4(self, dispatcher: CollectingDispatcher, tracker: Tracker, domain: "DomainDict"
-    ) -> Dict[Text, Any]:
-        if tracker.slots["requested_slot"] == "mathdone1":
-            return {"math4": "done"}
-        return {"math4": tracker.slots.get("math4")}
+#    def extract_math4(self, dispatcher: CollectingDispatcher, tracker: Tracker, domain: "DomainDict"
+#    ) -> Dict[Text, Any]:
+#        if tracker.slots["requested_slot"] == "mathdone1":
+#            return {"math4": "done"}
+#        return {"math4": tracker.slots.get("math4")}
         
     def extract_no1(self, dispatcher: CollectingDispatcher, tracker: Tracker, domain: "DomainDict"
     ) -> Dict[Text, Any]:
@@ -368,11 +357,11 @@ class ValidateInterviewtForm(FormValidationAction):
             return {"no2": "done"}
         return {"no2": tracker.slots.get("no2")}
         
-    def extract_no3(self, dispatcher: CollectingDispatcher, tracker: Tracker, domain: "DomainDict"
-    ) -> Dict[Text, Any]:
-        if tracker.slots["requested_slot"] == "mathdone1":
-            return {"no3": "done"}
-        return {"no3": tracker.slots.get("no3")}
+#    def extract_no3(self, dispatcher: CollectingDispatcher, tracker: Tracker, domain: "DomainDict"
+#    ) -> Dict[Text, Any]:
+#        if tracker.slots["requested_slot"] == "mathdone1":
+#            return {"no3": "done"}
+#        return {"no3": tracker.slots.get("no3")}
 
 
 #
