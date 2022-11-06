@@ -33,7 +33,7 @@ responses:
 #  utter_ask_math4:
 #  - text: Let's check your second derivative.
   utter_ask_mathdone1:
-  - text: ok, great! Please give me the answer you found to the problem by typing the numerical value.
+  - text: ok, great! Please give me the answer you found to the problem by saying the numerical value.
   utter_ask_mathdone2:
   - text: Can you walk me through your reasoning?
   utter_ask_no1:
