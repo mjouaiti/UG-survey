@@ -89,12 +89,6 @@ class Feedback():
             
         return feedback
 
-    def clean(self):
-        self._pitch, self._volume = [], []
-        self._rate, self._silence = [], []
-        self._fillers, self._maybe = [], []
-        self._errors = []
-
 if __name__ == "__main__":
     f = Feedback()
     f.transcript_analysis(transcript)
