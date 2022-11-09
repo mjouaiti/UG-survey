@@ -43,7 +43,7 @@ responses:
 #  utter_ask_no3:
 #  - text: Why don't you keep trying a little on your own and let me know if you need extra help by saying "help", if you found the solution, say "done".
   utter_done:
-  - text: Lovely. We have reached the end of our practice session. I have generated some feedback for you. Hope this can be useful and that you have enjoyed practicing with me today. Thanks your participation!
+  - text: Lovely. We have reached the end of our practice session. I have generated some feedback for you. Hope this can be useful and that you have enjoyed practicing with me today. Feel free to try the practice again, using your id, at any time. If you have any questions or concerns or have encountered any issue during the session, please email us at interviewbot@ic.ac.uk. Thanks for your participation! 
   utter_bye:
   - text: Bye! Have a nice day! And good luck with your interview!
   utter_ask_internship:
