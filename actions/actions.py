@@ -63,6 +63,22 @@ class ValidateInterviewtForm(FormValidationAction):
         text_of_last_user_message = tracker.latest_message.get("text")
 #        if ("course" in text_of_last_user_message or "curriculum" in text_of_last_user_message) and not tracker.slots.get("topic"):
 #            additional_slots.append("courses")
+
+        if tracker.slots["requested_slot"] == "sport" and tracker.slots.get("sport") == "yes":
+            updated_slots.remove("music")
+            updated_slots.remove("music1")
+            updated_slots.remove("music2")
+            updated_slots.remove("music3")
+            updated_slots.remove("extra")
+        elif tracker.slots["requested_slot"] == "sport" and tracker.slots.get("sport") == "no":
+            updated_slots.remove("sport1")
+            
+        if tracker.slots["requested_slot"] == "music" and tracker.slots.get("sport") == "no":
+            updated_slots.remove("music1")
+            updated_slots.remove("music2")
+            updated_slots.remove("music3")
+        elif tracker.slots["requested_slot"] == "music" and tracker.slots.get("yes") == "yes":
+            updated_slots.remove("extra")
                 
         if tracker.slots["requested_slot"] == "math1" and tracker.slots.get("math1") == "yes":
             updated_slots.remove("no1")
@@ -80,6 +96,84 @@ class ValidateInterviewtForm(FormValidationAction):
             updated_slots.remove("help")
 
         return additional_slots + updated_slots
+        
+    def validate_sport(
+        self,
+        slot_value: Any,
+        dispatcher: CollectingDispatcher,
+        tracker: Tracker,
+        domain: "DomainDict",
+    ) -> Dict[Text, Any]:
+        if tracker.slots["requested_slot"] != "sport":
+            return {"sport": tracker.slots.get("sport")}
+        slot_value = slot_value[:-1].lower().split(" ")
+        print(slot_value)
+        if "don't" in slot_value or "not" in slot_value or "never" in slot_value or "no" in slot_value or "haven't" in slot_value:
+            return {"sport": "no"}
+        else: # "do" in slot_value or "have" in slot_value or "yes" in slot_value:
+            return {"sport": "yes"}
+        return {"sport": None}
+        
+    def validate_music(
+        self,
+        slot_value: Any,
+        dispatcher: CollectingDispatcher,
+        tracker: Tracker,
+        domain: "DomainDict",
+    ) -> Dict[Text, Any]:
+        if tracker.slots["requested_slot"] != "music":
+            return {"music": tracker.slots.get("music")}
+        slot_value = slot_value[:-1].lower().split(" ")
+        if "don't" in slot_value or "never" in slot_value or "not" in slot_value or "no" in slot_value or "haven't" in slot_value:
+            return {"music": "no"}
+        else:
+            return {"music": "yes"}
+        return {"music": None}
+        
+    def validate_music1(
+        self,
+        slot_value: Any,
+        dispatcher: CollectingDispatcher,
+        tracker: Tracker,
+        domain: "DomainDict",
+    ) -> Dict[Text, Any]:
+        if tracker.slots["requested_slot"] != "music1":
+            return {"music1": tracker.slots.get("music1")}
+        if "wave" in slot_value.lower():
+            dispatcher.utter_message(text="Exactly! Sound can be represented as a wave.")
+        else:
+            dispatcher.utter_message(text="That's not correct, sound can be represented as a wave.")
+        return {"music1": "done"}
+        
+    def validate_music2(
+        self,
+        slot_value: Any,
+        dispatcher: CollectingDispatcher,
+        tracker: Tracker,
+        domain: "DomainDict",
+    ) -> Dict[Text, Any]:
+        if tracker.slots["requested_slot"] != "music2":
+            return {"music2": tracker.slots.get("music2")}
+        if "frequency" in slot_value.lower() or "period" in slot_value.lower():
+            dispatcher.utter_message(text="That's correct! Changing the frequency of a sound will affect it's pitch.")
+        else:
+            dispatcher.utter_message(text="That's not correct, changing the frequency of a sound will affect it's pitch.")
+        return {"music2": slot_value}
+        
+    def validate_music3(
+        self,
+        slot_value: Any,
+        dispatcher: CollectingDispatcher,
+        tracker: Tracker,
+        domain: "DomainDict",
+    ) -> Dict[Text, Any]:
+        if tracker.slots["requested_slot"] != "music3":
+            return {"music3": tracker.slots.get("music3")}
+        if "magnitude" in slot_value.lower() or "amplitude" in slot_value.lower():
+            dispatcher.utter_message(text="Well done! Changing the amplitude of a sound will affect it's volume.")
+        else: # "do" in slot_value or "have" in slot_value or "yes" in slot_value:
+            dispatcher.utter_message(text="That's not correct, changing the amplitude of a sound will affect it's volume.")
+        return {"music3": slot_value}
         
     def validate_mathdone1(
         self,
@@ -102,13 +196,26 @@ class ValidateInterviewtForm(FormValidationAction):
             
             if answer == ANSWER or answer == ANSWER2:
                 dispatcher.utter_message(text="Well done, you found the right answer.")
+            elif answer==ANSWER*2 or answer==ANSWER2*2:
+                dispatcher.utter_message(text="You were so close, but this is not the right answer.")
             else:
-                dispatcher.utter_message(text="Unfortunately, your answer is not correct.")
+                dispatcher.utter_message(text="Unfortunately, your answer is not correct. ")
         except ValueError:
             dispatcher.utter_message(text="Sorry, I couldn't process your answer. Please provide the numerical value you found.")
             return {"mathdone1": None}
         return {"mathdone1": str(answer)}
         
+    def validate_mathdone2(
+        self,
+        slot_value: Any,
+        dispatcher: CollectingDispatcher,
+        tracker: Tracker,
+        domain: "DomainDict",
+    ) -> Dict[Text, Any]:
+        dispatcher.utter_message(text="Thanks for walking me through your reasoning. Let me give you the answer, so that you can compare your attempt with the soliution. TO ADD")
+        return {"mathdone2": tracker.slots.get("mathdone2")}
+                    
+                    
     def validate_no1(
         self,
         slot_value: Any,
@@ -301,18 +408,41 @@ class ValidateInterviewtForm(FormValidationAction):
             if not "." in slot_value:
                 return {"future": None}
         return {"future": tracker.slots.get("future")}
-            
-    def validate_extra(
-        self,
-        slot_value: Any,
-        dispatcher: CollectingDispatcher,
-        tracker: Tracker,
-        domain: "DomainDict",
+       
+    def extract_music(self, dispatcher: CollectingDispatcher, tracker: Tracker, domain: "DomainDict"
     ) -> Dict[Text, Any]:
-        """Validate value."""
-        if tracker.slots["requested_slot"] == "extra":
-            if not "." in slot_value:
-                return {"extra": None}
+        if tracker.slots["requested_slot"] == "sport1":
+            return {"music": "done"}
+        return {"music": tracker.slots.get("music")}
+       
+    def extract_sport1(self, dispatcher: CollectingDispatcher, tracker: Tracker, domain: "DomainDict"
+    ) -> Dict[Text, Any]:
+        if tracker.slots["requested_slot"] == "music":
+            return {"sport1": "done"}
+        return {"sport1": tracker.slots.get("sport1")}
+       
+    def extract_music1(self, dispatcher: CollectingDispatcher, tracker: Tracker, domain: "DomainDict"
+    ) -> Dict[Text, Any]:
+        if tracker.slots["requested_slot"] == "sport1" or tracker.slots["requested_slot"] == "extra":
+            return {"music1": "done"}
+        return {"music1": tracker.slots.get("music1")}
+       
+    def extract_music2(self, dispatcher: CollectingDispatcher, tracker: Tracker, domain: "DomainDict"
+    ) -> Dict[Text, Any]:
+        if tracker.slots["requested_slot"] == "sport1" or tracker.slots["requested_slot"] == "extra":
+            return {"music2": "done"}
+        return {"music2": tracker.slots.get("music2")}
+       
+    def extract_music3(self, dispatcher: CollectingDispatcher, tracker: Tracker, domain: "DomainDict"
+    ) -> Dict[Text, Any]:
+        if tracker.slots["requested_slot"] == "sport1" or tracker.slots["requested_slot"] == "extra":
+            return {"music3": "done"}
+        return {"music3": tracker.slots.get("music3")}
+       
+    def extract_extra(self, dispatcher: CollectingDispatcher, tracker: Tracker, domain: "DomainDict"
+    ) -> Dict[Text, Any]:
+        if tracker.slots["requested_slot"] == "sport1" or tracker.slots["requested_slot"] == "music1":
+            return {"extra": "done"}
         return {"extra": tracker.slots.get("extra")}
         
     def extract_help(self, dispatcher: CollectingDispatcher, tracker: Tracker, domain: "DomainDict"
