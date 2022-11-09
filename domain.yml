@@ -9,9 +9,9 @@ responses:
   utter_greet:
   - text: Hello! How can I help you?
   utter_intro:
-  - text: First let me introduce myself, my name is BrainBot. I hope to be able to help you prepare for your upcoming interview. I am still in development, and as such, I have some limitations, I may not always understand what you're saying properly, so it would be really helpful if you could speak slowly and try to articulate.
+  - text: First let me introduce myself, my name is BrainBot. I hope to be able to help you prepare for your upcoming interview. I am still in development, and as such, I have some limitations, I may not always understand what you're saying properly, so it would be really helpful if you could speak slowly and try to articulate. Please try to treat this as your interview.
   utter_ask_hs:
-  - text: Please start by telling me what was your favourite subject in high school and why?
+  - text: Please start by telling me what you liked most about math class in highschool?
   utter_ask_passion:
   - text: Interesting. Can you tell me about anything that you have done that would demonstrate your passion for mechanical engineering?
   utter_ask_interest:
@@ -43,7 +43,7 @@ responses:
 #  utter_ask_no3:
 #  - text: Why don't you keep trying a little on your own and let me know if you need extra help by saying "help", if you found the solution, say "done".
   utter_done:
-  - text: Lovely. We have reached the end of our practice session. I have generated some feedback for you. Hope this can be useful. Thanks for practising with me today
+  - text: Lovely. We have reached the end of our practice session. I have generated some feedback for you. Hope this can be useful and that you have enjoyed practicing with me today. Thanks your participation!
   utter_bye:
   - text: Bye! Have a nice day! And good luck with your interview!
   utter_ask_internship:

@@ -94,5 +94,5 @@ class Feedback():
 if __name__ == "__main__":
     f = Feedback()
     f.transcript_analysis(transcript)
-    f.speech_analysis("/Users/Melanie/Documents/Documents/Imperial/Alexa-Data/recordings_driuser15/carer/driuser15_2021-09-08_12-18_0.wav")
+    f.speech_analysis("")
     print(f.summary())
